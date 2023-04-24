@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+
+
+</head>
+<body>
+<h1>Личный кабинет администратора - Редактирование заказов</h1>
+<form method="get" action="/admin">
+    <button type="submit">Назад в личный кабинет администратора</button>
+</form>
+<hr>
+<form th:method="POST" th:action="@{/admin/order/search}" th:object="${orderSearch}">
+    <input type="text" th:field="*{lastFourLetters}" placeholder="Последние 4 цифры заказа">
+    <input type="submit" value="Поиск">
+</form>
+<hr>
+<div th:each="order : ${orders}">
+    <p th:text="'Номер: ' + ${order.getNumber()}"></p>
+    <p th:text="'Продукт: ' + ${order.getProduct().getTitle()}"></p>
+    <p th:text="'Клиент: ' + ${order.getPerson().getLogin()}"></p>
+    <p th:text="'Количество: ' + ${order.getCount()}"></p>
+    <p th:text="'Цена: ' + ${order.getPrice()}"></p>
+    <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+    <p th:text="'Время: ' + ${order.getDateTime()}"></p>
+    <p th:text="'Список команд:'"/>
+    <form th:method="POST" th:action="@{/admin/order/{id}/setStatus(id=${order.getId()})}" th:object="${newStatus}">
+        <select th:field="*{newStatus}">
+            <option th:value="'Принят'" th:text="Принят"></option>
+            <option th:value="'Оформлен'" th:text="Оформлен"></option>
+            <option th:value="'Ожидает'" th:text="Ожидает"></option>
+            <option th:value="'Получен'" th:text="Получен"></option>
+        </select>
+        <input type="submit" value="Обновить статус">
+    </form>
+    <hr>
+</div>
+</body>
+</html>

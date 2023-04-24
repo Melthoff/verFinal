@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+
+</head>
+<body>
+<h1>Личный кабинет администратора - Редактирование товаров</h1>
+<form method="get" action="/admin">
+    <button type="submit">Назад в личный кабинет администратора</button>
+</form>
+<hr>
+<a href="/admin/product/add">Добавить товар</a>
+<hr>
+<div th:each="product : ${products}">
+    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <p th:text="'Cклад: ' + ${product.getWarehouse()}"></p>
+    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+    <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+    <img th:src="'/img/' + ${product.imageList[0].getFileName()}" alt="no image uploaded" width="300px">
+    <a th:href="@{/admin/product/edit/{id}(id=${product.getId()})}">Редактирование товара</a>
+    <a th:if="${product.getOrderList().size()} == 0" th:href="@{/admin/product/delete/{id}(id=${product.getId()})}">Удаление товара</a>
+    <p th:if="${product.getOrderList().size()} > 0" >Удаление товара невозможно, имеются активные заказы</p>
+    <hr>
+</div>
+</body>
+</html>

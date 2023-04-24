@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+
+</head>
+<body>
+<h1>Личный кабинет администратора - Список пользователей</h1>
+<form method="get" action="/admin">
+    <button type="submit">Назад в личный кабинет администратора</button>
+</form>
+<div th:each="user : ${users}">
+    <p th:text="'Логин: ' + ${user.getLogin()}"></p>
+    <p th:text="'Роль: ' + ${user.getRole()}"></p>
+    <a th:if="${user.getRole()} == 'ROLE_USER'" th:href="@{/admin/user/makeAdmin/{id}(id=${user.getId()})}">Сделать админом</a>
+    <a th:if="${user.getRole()} == 'ROLE_ADMIN'" th:href="@{/admin/user/unMakeAdmin/{id}(id=${user.getId()})}">Сделать обычным пользователем</a>
+    <hr>
+</div>
+</body>
+</html>

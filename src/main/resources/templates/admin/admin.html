@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
+
+    <style>
+        btn {
+            background: #eb94d0;
+            /* to create the gradients */
+            background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -moz-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -ms-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: -o-linear-gradient(top, #eb94d0, #2079b0);
+            background-image: linear-gradient(to bottom, #eb94d0, #2079b0);
+    </style>
+
+
+</head>
+<body>
+<h1>Личный кабинет администратора</h1>
+<form method="get" action="/logout">
+    <button type="submit">Выйти из личного кабинета</button>
+</form>
+<hr>
+<a href="admin/adminEditProducts">Список товаров</a>
+<hr>
+<a href="admin/adminEditOrders">Список заказов</a>
+<hr>
+<a href="admin/adminEditUsers">Список Пользователей</a>
+<hr>
+</body>
+</html>
